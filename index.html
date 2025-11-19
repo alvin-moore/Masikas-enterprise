@@ -1,433 +1,526 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masika's Enterprise - Fintech Solutions in Sierra Leone</title>
+    <title>Masika's Enterprise | Event Management</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config for Custom Colors/Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            gold: '#D4AF37',      /* Classic Gold */
+                            goldlight: '#F3E5AB', /* Champagne */
+                            dark: '#111111',      /* Near Black */
+                            gray: '#2A2A2A',      /* Dark Gray */
+                            cream: '#FAFAFA',     /* Off White */
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Lato"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "linear-gradient(to right bottom, rgba(17, 17, 17, 0.8), rgba(17, 17, 17, 0.6)), url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+                        'gold-gradient': "linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #D4AF37 100%)",
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Custom Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
+        /* Gold Text Effect */
+        .text-gold-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        html {
-            scroll-behavior: smooth;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
-
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: white;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        ::-webkit-scrollbar-track {
+            background: #111;
         }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+        ::-webkit-scrollbar-thumb {
+            background: #444; 
+            border-radius: 5px;
         }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .logo {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-        }
-
-        .company-name {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        /* Mobile Menu Toggle */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
-
-        nav a:hover {
-            opacity: 0.8;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: white;
-            text-align: center;
-            padding: 4rem 2rem;
-            min-height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            font-weight: bold;
-        }
-
-        .hero p {
-            font-size: 1.125rem;
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-
-        .cta-button {
-            background-color: white;
-            color: #1e3a8a;
-            padding: 0.75rem 2rem;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 4rem 2rem;
-            background-color: #f3f4f6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 3rem;
-            color: #1e3a8a;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-        }
-
-        .service-card h3 {
-            color: #1e3a8a;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            color: #4b5563;
-            line-height: 1.6;
-        }
-
-        /* About Section */
-        .about {
-            padding: 4rem 2rem;
-            background-color: white;
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-content p {
-            font-size: 1.125rem;
-            color: #4b5563;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 4rem 2rem;
-            background-color: #1e3a8a;
-            color: white;
-            text-align: center;
-        }
-
-        .contact-info {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-info p {
-            font-size: 1.125rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact-info a {
-            color: white;
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        footer {
-            background-color: #1e293b;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        /* Responsive Design */
-        @media (min-width: 640px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 768px) {
-            .hero {
-                min-height: 70vh;
-            }
-
-            .hero h1 {
-                font-size: 3rem;
-            }
-
-            .hero p {
-                font-size: 1.25rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .hero {
-                min-height: 80vh;
-            }
-
-            .services-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Mobile Menu Styles */
-        @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
-            nav {
-                width: 100%;
-                order: 3;
-            }
-
-            nav ul {
-                flex-direction: column;
-                gap: 0;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease-out;
-            }
-
-            nav ul.active {
-                max-height: 300px;
-                margin-top: 1rem;
-            }
-
-            nav li {
-                padding: 0.75rem 0;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            .header-container {
-                gap: 1rem;
-            }
-
-            .company-name {
-                font-size: 1.25rem;
-            }
-
-            .logo {
-                width: 40px;
-                height: 40px;
-            }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37; 
         }
     </style>
 </head>
-<body>
-    <header>
-        <div class="header-container">
-            <div class="logo-section">
-                <img src="/api/placeholder/50/50" alt="Masika's Enterprise Logo" class="logo">
-                <div class="company-name">Masika's Enterprise</div>
-            </div>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
-                ☰
-            </button>
-            <nav>
-                <ul id="navMenu">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<body class="bg-brand-cream text-gray-800 font-sans antialiased overflow-x-hidden">
 
-    <section id="home" class="hero">
-        <h1>Empowering Financial Growth in Sierra Leone</h1>
-        <p>Your trusted partner for innovative fintech solutions, mobile money services, and financial inclusion.</p>
-        <a href="#contact" class="cta-button">Get Started Today</a>
-    </section>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span class="font-serif text-2xl font-bold text-white tracking-wider">
+                        Masika's<span class="text-brand-gold">.</span>
+                    </span>
+                </div>
 
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Mobile Money Solutions</h3>
-                    <p>Seamless mobile money transfers, payments, and wallet services designed for the Sierra Leonean market.</p>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-white hover:text-brand-gold transition-colors text-sm uppercase tracking-widest font-semibold">Home</a>
+                    <a href="#about" class="text-white hover:text-brand-gold transition-colors text-sm uppercase tracking-widest font-semibold">About</a>
+                    <a href="#services" class="text-white hover:text-brand-gold transition-colors text-sm uppercase tracking-widest font-semibold">Services</a>
+                    <a href="#portfolio" class="text-white hover:text-brand-gold transition-colors text-sm uppercase tracking-widest font-semibold">Portfolio</a>
+                    <a href="#booking" class="bg-brand-gold hover:bg-white hover:text-brand-dark text-brand-dark px-6 py-2 rounded-none transition-all duration-300 font-bold text-sm uppercase tracking-wider">
+                        Book Now
+                    </a>
                 </div>
-                <div class="service-card">
-                    <h3>Digital Banking</h3>
-                    <p>Access modern banking services from anywhere with our secure digital banking platform.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Microfinance</h3>
-                    <p>Empowering small businesses and entrepreneurs with accessible microfinance solutions.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Payment Processing</h3>
-                    <p>Fast and secure payment processing for businesses of all sizes across Sierra Leone.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Financial Consulting</h3>
-                    <p>Expert financial advice and consulting services to help your business thrive.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Remittance Services</h3>
-                    <p>Quick and affordable international money transfer services for families and businesses.</p>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-brand-gold focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
                 </div>
             </div>
         </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-dark absolute w-full top-full border-t border-gray-800">
+            <div class="px-4 pt-2 pb-8 space-y-1 flex flex-col items-center">
+                <a href="#home" class="mobile-link block px-3 py-4 text-white text-lg font-serif hover:text-brand-gold">Home</a>
+                <a href="#about" class="mobile-link block px-3 py-4 text-white text-lg font-serif hover:text-brand-gold">About</a>
+                <a href="#services" class="mobile-link block px-3 py-4 text-white text-lg font-serif hover:text-brand-gold">Services</a>
+                <a href="#portfolio" class="mobile-link block px-3 py-4 text-white text-lg font-serif hover:text-brand-gold">Portfolio</a>
+                <a href="#booking" class="mobile-link mt-4 block px-8 py-3 bg-brand-gold text-brand-dark font-bold uppercase tracking-widest">Book Now</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center bg-hero-pattern bg-cover bg-center bg-fixed bg-no-repeat">
+        <div class="text-center px-4 max-w-4xl mx-auto relative z-10">
+            <p class="text-brand-gold uppercase tracking-[0.3em] text-sm md:text-base mb-4 reveal">Exquisite Event Management</p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-tight reveal delay-100">
+                Creating <span class="italic text-gold-gradient">Timeless</span> Memories
+            </h1>
+            <p class="text-gray-300 text-lg md:text-xl mb-10 font-light max-w-2xl mx-auto reveal delay-200">
+                From intimate gatherings to grand celebrations, Masika's Enterprise transforms your vision into flawless reality.
+            </p>
+            <div class="reveal delay-300">
+                <a href="#booking" class="inline-block border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-dark px-10 py-4 text-sm uppercase tracking-widest transition-all duration-300">
+                    Start Planning
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-white text-opacity-50 hover:text-brand-gold transition-colors">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
     </section>
 
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Us</h2>
-            <div class="about-content">
-                <p>Masika's Enterprise is a leading fintech company based in Sierra Leone, dedicated to providing innovative financial solutions that drive economic growth and financial inclusion.</p>
-                <p>With years of experience in the financial technology sector, we understand the unique challenges and opportunities in the Sierra Leonean market. Our mission is to make financial services accessible, affordable, and secure for everyone.</p>
-                <p>We combine cutting-edge technology with local expertise to deliver services that truly meet the needs of our customers, from individual users to large enterprises.</p>
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="relative reveal">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-brand-gold hidden md:block"></div>
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Event Setup" class="w-full h-auto shadow-2xl object-cover aspect-[4/5]">
+                    <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-brand-gold hidden md:block"></div>
+                </div>
+                <div class="reveal">
+                    <h2 class="text-brand-gold uppercase tracking-widest text-sm font-bold mb-2">Who We Are</h2>
+                    <h3 class="text-4xl md:text-5xl font-serif text-brand-dark mb-6">We Plan. You Party.</h3>
+                    <p class="text-gray-600 leading-relaxed mb-6 text-lg">
+                        At Masika's Enterprise, we believe that every event tells a story. Founded with a passion for perfection and an eye for detail, we specialize in curating bespoke experiences that reflect your unique style and personality.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-8 text-lg">
+                        Whether it's a corporate gala, a fairytale wedding, or a milestone birthday, our team handles the logistics, design, and execution so you can be a guest at your own event.
+                    </p>
+                    <div class="grid grid-cols-3 gap-4 border-t border-gray-200 pt-8">
+                        <div class="text-center">
+                            <span class="block text-3xl font-serif text-brand-gold font-bold">500+</span>
+                            <span class="text-xs uppercase tracking-widest text-gray-500">Events</span>
+                        </div>
+                        <div class="text-center border-l border-gray-200">
+                            <span class="block text-3xl font-serif text-brand-gold font-bold">100%</span>
+                            <span class="text-xs uppercase tracking-widest text-gray-500">Satisfaction</span>
+                        </div>
+                        <div class="text-center border-l border-gray-200">
+                            <span class="block text-3xl font-serif text-brand-gold font-bold">10+</span>
+                            <span class="text-xs uppercase tracking-widest text-gray-500">Years Exp.</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <div class="contact-info">
-                <p><strong>Address:</strong> Freetown, Sierra Leone</p>
-                <p><strong>Phone:</strong> +232 XX XXX XXXX</p>
-                <p><strong>Email:</strong> <a href="mailto:info@masika-enterprise.sl">info@masika-enterprise.sl</a></p>
-                <p style="margin-top: 1.5rem;">Ready to transform your financial future? Get in touch with us today!</p>
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-brand-dark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand-gold uppercase tracking-widest text-sm font-bold mb-2">Our Expertise</h2>
+                <h3 class="text-4xl font-serif mb-4">Curated Services</h3>
+                <div class="w-24 h-1 bg-brand-gold mx-auto"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="group p-8 border border-gray-800 hover:border-brand-gold transition-all duration-500 bg-gray-900 reveal">
+                    <div class="text-brand-gold text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-rings-wedding"></i>
+                    </div>
+                    <h4 class="text-2xl font-serif mb-4">Weddings</h4>
+                    <p class="text-gray-400 mb-6">From "Yes" to "I Do," we handle venue selection, vendor coordination, and day-of execution for your perfect day.</p>
+                    <a href="#booking" class="text-sm uppercase tracking-widest text-brand-gold hover:text-white transition-colors">Book Consultation &rarr;</a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="group p-8 border border-gray-800 hover:border-brand-gold transition-all duration-500 bg-gray-900 reveal delay-100">
+                    <div class="text-brand-gold text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h4 class="text-2xl font-serif mb-4">Social Events</h4>
+                    <p class="text-gray-400 mb-6">Birthdays, anniversaries, and baby showers. We bring the creativity and fun to make your milestone memorable.</p>
+                    <a href="#booking" class="text-sm uppercase tracking-widest text-brand-gold hover:text-white transition-colors">Start Planning &rarr;</a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="group p-8 border border-gray-800 hover:border-brand-gold transition-all duration-500 bg-gray-900 reveal delay-200">
+                    <div class="text-brand-gold text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h4 class="text-2xl font-serif mb-4">Corporate</h4>
+                    <p class="text-gray-400 mb-6">Product launches, conferences, and holiday parties. We ensure professionalism and brand alignment in every detail.</p>
+                    <a href="#booking" class="text-sm uppercase tracking-widest text-brand-gold hover:text-white transition-colors">Get a Quote &rarr;</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Masika's Enterprise. All rights reserved. | Empowering Sierra Leone's Financial Future</p>
+    <!-- Portfolio Grid -->
+    <section id="portfolio" class="py-24 bg-brand-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand-gold uppercase tracking-widest text-sm font-bold mb-2">Gallery</h2>
+                <h3 class="text-4xl font-serif text-brand-dark">Recent Masterpieces</h3>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Image 1 -->
+                <div class="relative group overflow-hidden h-72 reveal">
+                    <img src="https://images.unsplash.com/photo-1505932794465-147d1f1b2c97?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Event 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-serif text-xl">Summer Gala</p>
+                    </div>
+                </div>
+                <!-- Image 2 -->
+                <div class="relative group overflow-hidden h-72 reveal">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de3c9a59af57?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Event 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-serif text-xl">Garden Wedding</p>
+                    </div>
+                </div>
+                <!-- Image 3 -->
+                <div class="relative group overflow-hidden h-72 reveal">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Event 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-serif text-xl">Private Dining</p>
+                    </div>
+                </div>
+                <!-- Image 4 -->
+                <div class="relative group overflow-hidden h-72 reveal">
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Event 4" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-serif text-xl">Corporate Mixer</p>
+                    </div>
+                </div>
+                <!-- Image 5 -->
+                <div class="relative group overflow-hidden h-72 reveal">
+                    <img src="https://images.unsplash.com/photo-1519225448526-0645616461b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Event 5" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-serif text-xl">Luxury Decor</p>
+                    </div>
+                </div>
+                <!-- Image 6 -->
+                <div class="relative group overflow-hidden h-72 reveal">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Event 6" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <p class="text-white font-serif text-xl">Outdoor Reception</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking/Contact Section -->
+    <section id="booking" class="py-24 bg-brand-dark relative overflow-hidden">
+        <!-- Background decorations -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-gold opacity-5 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-gold opacity-5 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                
+                <!-- Contact Info -->
+                <div class="text-white reveal">
+                    <h2 class="text-brand-gold uppercase tracking-widest text-sm font-bold mb-2">Book Your Date</h2>
+                    <h3 class="text-4xl md:text-5xl font-serif mb-6">Let's Create Magic</h3>
+                    <p class="text-gray-400 mb-10 text-lg leading-relaxed">
+                        Ready to start planning? Fill out the form to check availability and schedule your initial consultation. We reply within 24 hours.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="text-brand-gold text-xl mt-1 w-8">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-serif text-lg">Location</h5>
+                                <p class="text-gray-400">Headquartered in Freetown, Serving Globally</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-brand-gold text-xl mt-1 w-8">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-serif text-lg">Phone</h5>
+                                <p class="text-gray-400">+232 77 000 000</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-brand-gold text-xl mt-1 w-8">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-serif text-lg">Email</h5>
+                                <p class="text-gray-400">bookings@masikaenterprise.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Form -->
+                <div class="bg-white p-8 md:p-10 shadow-2xl reveal delay-100">
+                    <form id="bookingForm" class="space-y-6">
+                        <div id="form-message" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 relative mb-4 text-sm">
+                            <strong class="font-bold">Success!</strong>
+                            <span class="block sm:inline">Your request has been sent. We will contact you shortly.</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">First Name</label>
+                                <input type="text" required class="w-full bg-gray-50 border border-gray-200 p-3 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Last Name</label>
+                                <input type="text" required class="w-full bg-gray-50 border border-gray-200 p-3 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Email Address</label>
+                            <input type="email" required class="w-full bg-gray-50 border border-gray-200 p-3 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors">
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Event Type</label>
+                                <select class="w-full bg-gray-50 border border-gray-200 p-3 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors text-gray-700">
+                                    <option>Wedding</option>
+                                    <option>Corporate Event</option>
+                                    <option>Private Party</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Date</label>
+                                <input type="date" class="w-full bg-gray-50 border border-gray-200 p-3 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors text-gray-700">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Est. Guest Count</label>
+                            <input type="number" placeholder="e.g. 150" class="w-full bg-gray-50 border border-gray-200 p-3 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 uppercase tracking-wider mb-2">Vision / Details</label>
+                            <textarea rows="3" class="w-full bg-gray-50 border border-gray-200 p-3 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold transition-colors"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-gold hover:bg-brand-dark hover:text-white text-brand-dark font-bold py-4 px-8 uppercase tracking-widest transition-all duration-300">
+                            Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white border-t border-gray-900 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <span class="font-serif text-2xl font-bold text-white tracking-wider block mb-4">
+                        Masika's<span class="text-brand-gold">.</span>
+                    </span>
+                    <p class="text-gray-500 text-sm">Making dreams a reality, one event at a time.</p>
+                </div>
+                <div>
+                    <h4 class="text-brand-gold uppercase tracking-widest text-xs font-bold mb-4">Explore</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#home" class="hover:text-brand-gold transition-colors">Home</a></li>
+                        <li><a href="#about" class="hover:text-brand-gold transition-colors">About</a></li>
+                        <li><a href="#services" class="hover:text-brand-gold transition-colors">Services</a></li>
+                        <li><a href="#portfolio" class="hover:text-brand-gold transition-colors">Portfolio</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-brand-gold uppercase tracking-widest text-xs font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-gold transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-brand-gold uppercase tracking-widest text-xs font-bold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:text-brand-gold hover:border-brand-gold transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:text-brand-gold hover:border-brand-gold transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:text-brand-gold hover:border-brand-gold transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-900 pt-8 text-center text-gray-600 text-xs">
+                <p>&copy; 2023 Masika's Enterprise. All Rights Reserved.</p>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // Mobile menu toggle functionality
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        menuToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            
-            // Change icon based on menu state
-            if (navMenu.classList.contains('active')) {
-                menuToggle.textContent = '✕';
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
             } else {
-                menuToggle.textContent = '☰';
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
             }
         });
 
-        // Close menu when clicking on a link
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-                menuToggle.textContent = '☰';
+        // Close mobile menu when a link is clicked
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
             });
         });
 
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const isClickInsideNav = navMenu.contains(event.target);
-            const isClickOnToggle = menuToggle.contains(event.target);
-            
-            if (!isClickInsideNav && !isClickOnToggle && navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                menuToggle.textContent = '☰';
+        // Navbar Background Change on Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-brand-dark', 'shadow-lg');
+                navbar.classList.remove('bg-transparent', 'py-4');
+                navbar.classList.add('py-2');
+            } else {
+                navbar.classList.remove('bg-brand-dark', 'shadow-lg', 'py-2');
+                navbar.classList.add('bg-transparent', 'py-4');
             }
+        });
+
+        // Scroll Animation (Intersection Observer)
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Optional: Stop observing once revealed
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.15, // Trigger when 15% visible
+        });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Booking Form Handling
+        const form = document.getElementById('bookingForm');
+        const message = document.getElementById('form-message');
+        const submitBtn = form.querySelector('button[type="submit"]');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate processing
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = 'Sending...';
+            submitBtn.disabled = true;
+
+            setTimeout(() => {
+                // Success State
+                message.classList.remove('hidden');
+                form.reset();
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    message.classList.add('hidden');
+                }, 5000);
+            }, 1500);
         });
     </script>
 </body>
